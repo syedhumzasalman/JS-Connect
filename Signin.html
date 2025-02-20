@@ -9,14 +9,16 @@
       href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB3kuuAZW68e1h7q73JLtLOyAZ0lVomJYNSA&s"
       type="image/x-icon"
     />
-    <title>Document</title>
+    <!-- AOS Library CDN -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>JS Connect</title>
     <!-- internal CSS -->
-    <link rel="stylesheet" href="CSS/Index.css/login.css">
+    <link rel="stylesheet" href="CSS/Index.css/Signin.css">
 </head>
 <body>
 
     <div class="login-light"></div>
-    <div class="login-box">
+    <div class="login-box" data-aos="flip-left" style="transition: 1s ease;">
         <form action="#">
             <input type="checkbox" class="input-check" id="input-check">
             <label for="input-check" class="toggle">
@@ -25,7 +27,7 @@
             </label>
             <div class="light"></div>
 
-            <h2>Login</h2>
+            <h2>Sign in</h2>
             <div class="input-box">
                 <span class="icon">
                     <ion-icon name="mail"></ion-icon>
@@ -48,7 +50,7 @@
             </div>
             <button type="submit">Login</button>
             <div class="register-link">
-                <p>Don't have an account? <a href="#">Sign up</a></p>
+                <p>Don't have an account? <a href="#" onclick="signUp()">Sign up</a></p>
             </div>
         </form>
     </div>
@@ -56,7 +58,10 @@
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+      </script>
 
 
 
