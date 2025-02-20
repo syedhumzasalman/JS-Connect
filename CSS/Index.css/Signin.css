@@ -310,3 +310,11 @@ button {
         0 0 45px #00f7ff,
         0 0 60px #00f7ff;
 }
+
+
+@media screen and (max-width: 550px){
+    .toggle {
+        top: -150px;
+        right: 10px;
+    }
+}
