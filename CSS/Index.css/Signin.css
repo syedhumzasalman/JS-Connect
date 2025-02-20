@@ -312,9 +312,58 @@ button {
 }
 
 
-@media screen and (max-width: 550px){
+@media only screen and (max-width: 500px) {
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-box {
+        width: 90%;
+        height: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .input-box {
+        width: 100%;
+    }
+
+    .input-box input {
+        font-size: 0.9em;
+        height: 45px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .remember-forgot {
+        font-size: 0.8em;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
     .toggle {
-        top: -150px;
-        right: 10px;
+        right: -50px;
+        width: 50px;
+        height: 100px;
+    }
+
+    .toggle::after {
+        width: 35px;
+        height: 35px;
+    }
+
+    .toggle .text {
+        font-size: 0.9em;
+    }
+    .login-light {
+        width: 300px;
     }
 }
