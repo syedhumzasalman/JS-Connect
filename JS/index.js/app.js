@@ -54,4 +54,47 @@ function facebook() {
 
 // *************************************************************************************
 
+function signUp(){
+  
+  let userName = document.getElementById("userName");
+  let signupEmail = document.getElementById("signupEmail");
+  let signupPassword = document.getElementById("signupPassword");
+  let userDataEP = JSON.parse(localStorage.getItem("userData")) || [];
+  
+  let name =  userName.value;
+  let email = signupEmail.value;
+  let password = signupPassword.value;
 
+ if((email != "" && password != "") && (email.includes("@gmail.com"))){
+  let objUser = {
+    "Name" : name,
+    "Email" :  email,
+    "Password": password,
+  }
+  userDataEP.push(objUser)
+
+localStorage.setItem("userData", JSON.stringify(userDataEP))
+}
+
+}
+
+
+
+function SignIn(){
+  let signinEmail = document.getElementById("signinEmail");
+  let signinPassword = document.getElementById("signinPassword");
+  
+  let loginEmail = signinEmail.value;
+  let loginPassword = signinPassword.value;
+
+  let userDataEP = JSON.parse(localStorage.getItem("userData")) || [];
+  let userFound = userDataEP.find(user => user.Email === loginEmail && user.Password === loginPassword);
+
+  if (userFound) {
+    alert("Login successful!");
+    // Yahan aap user ko dusri page par redirect bhi kar sakte hain.
+  } else {
+    alert("Invalid email or password!");
+  }
+
+}
