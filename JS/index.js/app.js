@@ -95,10 +95,14 @@ function SignIn(){
   let userFound = userDataEP.find(user => user.Email === loginEmail && user.Password === loginPassword);
 
   if (userFound) {
-    alert("Login successful!");
-    // Yahan aap user ko dusri page par redirect bhi kar sakte hain.
+    window.location.href = "postingpage.html";
   } else {
-    alert("Invalid email or password!");
+    Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid email or password!",
+        footer: 'Dont have an account? <a href="signup.html"> Sign up</a>'
+      });
   }
 
 }
