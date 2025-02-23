@@ -88,8 +88,12 @@
 .marge{
     margin-top: 70px;
 }
-.marge1{
-    margin-top: 170px;
+/* .marge1{
+    margin-top: 400px;
+} */
+
+.content-box:first-child {
+    margin-top: 400px;
 }
 
 .post-container {
@@ -123,6 +127,21 @@
     width: 30px;
     border-radius: 50%;
     border: 1px solid rgb(139, 134, 134);
+}
+
+.post-box{
+    background-color: white;
+    height: 300px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#postInput:empty:before {
+    content: "What's on your mind?";
+    color: gray;
+    margin: 20px;
 }
 
 

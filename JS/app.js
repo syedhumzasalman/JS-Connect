@@ -52,7 +52,10 @@ function facebook() {
   }
 
 
-// *************************************************************************************
+  // *************************************************************************************
+  let userNameDispaly = document.getElementById("userNameDispaly");
+
+
 
 //  Sigup Function
 
@@ -60,13 +63,13 @@ function signUp() {
     let userName = document.getElementById("userName");
     let signupEmail = document.getElementById("signupEmail");
     let signupPassword = document.getElementById("signupPassword");
-  
+    let userDataEP = JSON.parse(localStorage.getItem("userData")) || [];
+    
     let name = userName.value.trim();
     let email = signupEmail.value.trim();
     let password = signupPassword.value.trim();
   
     
-    let userDataEP = JSON.parse(localStorage.getItem("userData")) || [];
   
     
     let userExists = userDataEP.some(user => user.Email === email);
@@ -123,9 +126,9 @@ function signUp() {
 //  Sigin Function
 
 function SignIn(){
-  let signinEmail = document.getElementById("signinEmail");
-  let signinPassword = document.getElementById("signinPassword");
-  
+    let signinEmail = document.getElementById("signinEmail");
+    let signinPassword = document.getElementById("signinPassword");
+    
   let loginEmail = signinEmail.value;
   let loginPassword = signinPassword.value;
 
@@ -133,6 +136,8 @@ function SignIn(){
   let userFound = userDataEP.find(user => user.Email === loginEmail && user.Password === loginPassword);
 
   if (userFound) {
+    localStorage.setItem("loggedInUser", JSON.stringify(userFound)); 
+
     window.location.href = "../postingpage.html";
   } else {
     Swal.fire({
@@ -148,7 +153,10 @@ function SignIn(){
 
 
 // *************************************************************************************
-let postingDisplay = document.getElementById("postingDisplay");
+
+
+
+// *************************************************************************************
 
 
   function coding() {
@@ -501,18 +509,26 @@ function Cats() {
 let postingInput = document.getElementById("postingInput");
 let postInput = document.getElementById("postInput");
 let userIcon = document.getElementById("userIcon");
-
+let postBtn = document.getElementById("postBtn");
 
 // *************************************************************************************
 
 
 function posting() { 
+ 
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
     postingInput.style.flexDirection = "column";
     postInput.style.height = "200px";
     postInput.style.placeContent = "center";
     postInput.style.textAlign = "center";
     userIcon.style.placeContent = "start"
-    userIcon.innerHTML = `<p class="fw-bold m-0">Gagan Saini • 3rd+</p>`
+    userIcon.innerHTML = `<p class="fw-bold m-0"></p>`
+    if (loggedInUser) {
+        userIcon.innerHTML = `<strong> Hello,  ${loggedInUser.Name} Wellcome to JS Connect </strong>`;
+    } else {
+        userIcon.innerHTML = "Guest User";
+    }
 }
 
 // *************************************************************************************
@@ -522,7 +538,8 @@ function changeColor(color) {
     // console.log("color");
     if (postInput) {
         postInput.style.backgroundColor = color;
-        postInput.style.color = "#000"; 
+        postInput.style.color = "#000";
+        postInput.style.fontWeight = "bold";
     }
 }
 
@@ -534,6 +551,82 @@ document.getElementById("customColorPicker").addEventListener("input", function(
 // *************************************************************************************
 
 
-postInput.addEventListener("input", function () {
-    postBtn.disabled = postInput.value.trim() == "";
+postInput.addEventListener("click", function () {
+    postBtn.disabled = false;
 });
+
+
+
+function post() {
+
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    let postInput = document.getElementById("postInput");
+
+    let postValue = postInput.value;
+    // let postContent = postInput.innerHTML;
+    let bgColor = postInput.style.backgroundColor;
+    let textColor = postInput.style.color; 
+
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+    let newPost = {
+        "user": loggedInUser.Name,
+        "content": postValue,
+        // "content1": postContent,
+        "bgColor": bgColor,
+        "textColor": textColor,
+    };
+
+    posts.push(newPost);
+
+    localStorage.setItem("posts", JSON.stringify(posts));
+
+    postInput.value = "";
+
+    displayPosts();
+
+    
+
+}
+
+
+function displayPosts() {
+
+    let contentBox = document.getElementById("contentBox");
+    contentBox.innerHTML = "";
+
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+    for (let post of posts.reverse()) {
+        contentBox.innerHTML += `
+        <div class="content-box p-3 bg-white mb-3 rounded shadow-sm">
+            <div class="d-flex align-items-center gap-2">
+                <ion-icon class="fs-4" name="person-circle-outline"></ion-icon>
+                <p class="fw-bold m-0">${post.user}</p>
+            </div>
+            <p class="fs-6">${post.content}</p>
+            <p class="post-box" style="background-color: ${post.bgColor}; color: ${post.textColor};">${post.content}</p>
+            <div class="d-flex justify-content-center gap-3 mt-2 bg-white">
+                <button class="btn btn-light">Like</button>
+                <button class="btn btn-light">Comment</button>
+            </div>
+        </div>`;
+    }
+}
+
+
+window.onload = function() {
+    let userNameDispaly = document.getElementById("userNameDispaly");
+    
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (loggedInUser) {
+        userNameDispaly.innerHTML = `<strong>${loggedInUser.Name}</strong>`;
+    } else {
+        userNameDispaly.innerHTML = "Guest User";
+    }
+
+    displayPosts();
+};
