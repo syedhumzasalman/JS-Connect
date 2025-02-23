@@ -484,12 +484,21 @@ function changeColor(color) {
     // console.log("color");
     if (postInput) {
         postInput.style.backgroundColor = color;
-        postInput.style.color = "#000"; 
+        postInput.style.color = "#000";
+        postInput.style.fontWeight = "bold";
     }
+
 }
 
-document.getElementById("customColorPicker").addEventListener("input", function() {
-    changeColor(this.value); 
+document.addEventListener("DOMContentLoaded", function() {
+    let colorPicker = document.getElementById("customColorPicker");
+    if (colorPicker) {
+        colorPicker.addEventListener("input", function() {
+            changeColor(this.value); 
+        });
+    } else {
+        console.error("customColorPicker element not found!");
+    }
 });
 
 
