@@ -56,29 +56,67 @@ function facebook() {
 
 //  Sigup Function
 
-function signUp(){
+function signUp() {
+    let userName = document.getElementById("userName");
+    let signupEmail = document.getElementById("signupEmail");
+    let signupPassword = document.getElementById("signupPassword");
   
-  let userName = document.getElementById("userName");
-  let signupEmail = document.getElementById("signupEmail");
-  let signupPassword = document.getElementById("signupPassword");
-  let userDataEP = JSON.parse(localStorage.getItem("userData")) || [];
+    let name = userName.value.trim();
+    let email = signupEmail.value.trim();
+    let password = signupPassword.value.trim();
   
-  let name =  userName.value;
-  let email = signupEmail.value;
-  let password = signupPassword.value;
-
- if((email != "" && password != "") && (email.includes("@gmail.com"))){
-  let objUser = {
-    "Name" : name,
-    "Email" :  email,
-    "Password": password,
+    
+    let userDataEP = JSON.parse(localStorage.getItem("userData")) || [];
+  
+    
+    let userExists = userDataEP.some(user => user.Email === email);
+  
+    if (!name || !email || !password) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "All fields are required!",
+      });
+      return;
+    }
+  
+    if (!email.includes("@gmail.com")) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Email",
+        text: "Please enter a valid Gmail address!",
+      });
+      return;
+    }
+  
+    if (userExists) {
+      Swal.fire({
+        icon: "error",
+        title: "User Already Exists",
+        text: "This email is already registered!",
+      });
+    } else {
+      let objUser = {
+        Name: name,
+        Email: email,
+        Password: password,
+      };
+  
+      userDataEP.push(objUser);
+      localStorage.setItem("userData", JSON.stringify(userDataEP));
+  
+      Swal.fire({
+        icon: "success",
+        title: "Sign Up Successful!",
+        text: "Redirecting to login page...",
+        timer: 2000,
+        showConfirmButton: false
+      }).then(() => {
+        window.location.href = "signin.html";
+      });
+    }
   }
-  userDataEP.push(objUser)
-
-localStorage.setItem("userData", JSON.stringify(userDataEP))
-}
-
-}
+  
 
 // *************************************************************************************
 
@@ -95,7 +133,7 @@ function SignIn(){
   let userFound = userDataEP.find(user => user.Email === loginEmail && user.Password === loginPassword);
 
   if (userFound) {
-    window.location.href = "postingpage.html";
+    window.location.href = "../postingpage.html";
   } else {
     Swal.fire({
         icon: "error",
@@ -484,21 +522,12 @@ function changeColor(color) {
     // console.log("color");
     if (postInput) {
         postInput.style.backgroundColor = color;
-        postInput.style.color = "#000";
-        postInput.style.fontWeight = "bold";
+        postInput.style.color = "#000"; 
     }
-
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    let colorPicker = document.getElementById("customColorPicker");
-    if (colorPicker) {
-        colorPicker.addEventListener("input", function() {
-            changeColor(this.value); 
-        });
-    } else {
-        console.error("customColorPicker element not found!");
-    }
+document.getElementById("customColorPicker").addEventListener("input", function() {
+    changeColor(this.value);
 });
 
 
