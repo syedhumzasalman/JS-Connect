@@ -104,10 +104,15 @@ function SignIn(){
 }
 
 
+
 // *************************************************************************************
+let postingDisplay = document.getElementById("postingDisplay");
 
 
   function coding() {
+
+    postingDisplay.style.display = "none"; 
+
     let contentBox = document.getElementById("contentBox");
     contentBox.innerHTML = `
         <div class="content-box p-3 bg-white mb-3 rounded shadow-sm">
@@ -155,6 +160,10 @@ function SignIn(){
 
 
 function Travel() {
+
+    postingDisplay.style.display = "none"; 
+
+
   let contentBox = document.getElementById("contentBox");
   contentBox.innerHTML = `
       <div class="content-box p-3 bg-white mb-3 rounded shadow-sm">
@@ -203,6 +212,10 @@ function Travel() {
 
 
 function Business() {
+
+    postingDisplay.style.display = "none"; 
+
+
   let contentBox = document.getElementById("contentBox");
   contentBox.innerHTML = `
       <div class="content-box p-3 bg-white mb-3 rounded shadow-sm">
@@ -252,6 +265,10 @@ function Business() {
 
 
 function Food() {
+
+    postingDisplay.style.display = "none"; 
+
+
   let contentBox = document.getElementById("contentBox");
   contentBox.innerHTML = `
       <div class="content-box p-3 bg-white mb-3 rounded shadow-sm">
@@ -301,6 +318,10 @@ function Food() {
 
 
 function Flowers() {
+
+    postingDisplay.style.display = "none"; 
+
+
   let contentBox = document.getElementById("contentBox");
   contentBox.innerHTML = `
       <div class="content-box p-3 bg-white mb-3 rounded shadow-sm">
@@ -351,23 +372,27 @@ function Flowers() {
 
 
 function Technology() {
+
+    postingDisplay.style.display = "none"; 
+
+
   let contentBox = document.getElementById("contentBox");
   contentBox.innerHTML = `
-      <div class="content-box p-2 bg-white mb-3 rounded shadow-sm">
+      <div class="content-box p-5 bg-white mb-5 rounded shadow-sm">
           <div class="d-flex align-items-center gap-2">
           </div>
           <p class="fs-6"></p>
           <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7297931202819244033" height="1170" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
       </div>
 
-      <div class="content-box p-2 bg-white mb-3 rounded shadow-sm">
+      <div class="content-box p-5  bg-white mb-3 rounded shadow-sm">
           <div class="d-flex align-items-center gap-2">
           </div>
           <p class="fs-6"></p>
           <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7295633213564043265" height="1149" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
       </div>
 
-      <div class="content-box p-2 bg-white mb-3 rounded shadow-sm">
+      <div class="content-box p-5 bg-white mb-3 rounded shadow-sm">
           <div class="d-flex align-items-center gap-2">
           </div>
           <p class="fs-6"></p>
@@ -383,6 +408,10 @@ function Technology() {
 
 
 function Cats() {
+
+    postingDisplay.style.display = "none"; 
+
+
   let contentBox = document.getElementById("contentBox");
   contentBox.innerHTML = `
       <div class="content-box p-3 bg-white mb-3 rounded shadow-sm">
@@ -426,3 +455,43 @@ function Cats() {
   `;
 }
 
+
+let postingInput = document.getElementById("postingInput");
+let postInput = document.getElementById("postInput");
+let userIcon = document.getElementById("userIcon");
+
+
+// *************************************************************************************
+
+
+function posting() { 
+    postingInput.style.flexDirection = "column";
+    postInput.style.height = "200px";
+    postInput.style.placeContent = "center";
+    postInput.style.textAlign = "center";
+    userIcon.style.placeContent = "start"
+    userIcon.innerHTML = `<p class="fw-bold m-0">Gagan Saini • 3rd+</p>`
+}
+
+// *************************************************************************************
+
+
+function changeColor(color) {
+    // console.log("color");
+    if (postInput) {
+        postInput.style.backgroundColor = color;
+        postInput.style.color = "#000"; 
+    }
+}
+
+document.getElementById("customColorPicker").addEventListener("input", function() {
+    changeColor(this.value); 
+});
+
+
+// *************************************************************************************
+
+
+postInput.addEventListener("input", function () {
+    postBtn.disabled = postInput.value.trim() == "";
+});

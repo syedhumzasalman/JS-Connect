@@ -15,16 +15,17 @@
     height: 320px;
     background-color: #918c8c;
     position: absolute;
-    left: 200px;
-    top: 55px;
+    left: 250px;
+    top: 65px;
 }
 
 .posting-box{
-    width: 60%;
+    width: 70%;
     height: 5rem;
 }
 
 .positng-input{
+    height: 30px;
     width: 90%;
     padding: 5px;
     border: 1px solid rgb(179, 170, 170);
@@ -67,7 +68,7 @@
 .content-box{
     margin-top: 50px;
     height: 100%;
-    width: 60%;
+    width: 70%;
     background-color: white;
 }
 
@@ -86,6 +87,42 @@
 
 .marge{
     margin-top: 70px;
+}
+.marge1{
+    margin-top: 170px;
+}
+
+.post-container {
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.disabled-post {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.color-btn{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-btn button{
+    background-color: aqua;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 1px solid rgb(139, 134, 134);
 }
 
 
