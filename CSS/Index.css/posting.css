@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Funnel+Display:wght@300..800&family=Syne+Mono&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Syne Mono", serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #f2f4f7;
+}
+
+.part-line {
+    width: 1px;
+    height: 320px;
+    background-color: #918c8c;
+    position: absolute;
+    left: 200px;
+    top: 55px;
+}
+
+.posting-box{
+    width: 60%;
+    height: 5rem;
+}
+
+.positng-input{
+    width: 90%;
+    padding: 5px;
+    border: 1px solid rgb(179, 170, 170);
+    border-radius: 15px;
+    outline: none;
+}
+
+.custom-file-upload {
+    padding: 10px 20px;
+    color: #4CAF50;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#file-upload {
+    display: none;
+}
+
+.custom-video-upload{
+    padding: 10px 20px;
+    color: #4CAF50;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#video-upload {
+    display: none;
+}
+
+.my-btn button{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    border: none;
+    margin: 15px;
+}
+
+
+.content-box{
+    margin-top: 50px;
+    height: 100%;
+    width: 60%;
+    background-color: white;
+}
+
+.content-box img{
+   height: 100%;
+   width: 100%;
+   object-fit: cover;
+}
+
+.content-box button{
+    background-color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+ }
+
+.marge{
+    margin-top: 70px;
+}
+
+
+@media only screen and (max-width: 768px){
+    .part-line {
+        left: 140px;
+        top: 45px;
+    }
+}
+
+
+@media only screen and (max-width: 400px){
+    .part-line {
+        left: 110px;
+        top: 44px;
+    }
+}
