@@ -161,7 +161,9 @@ function SignIn(){
 
   function coding() {
 
-    postingDisplay.style.display = "none"; 
+    // postingDisplay.style.display = "none"; 
+
+    displayPosts()
 
     let contentBox = document.getElementById("contentBox");
     contentBox.innerHTML = `
@@ -211,7 +213,9 @@ function SignIn(){
 
 function Travel() {
 
-    postingDisplay.style.display = "none"; 
+    // postingDisplay.style.display = "none"; 
+
+    displayPosts()
 
 
   let contentBox = document.getElementById("contentBox");
@@ -263,7 +267,8 @@ function Travel() {
 
 function Business() {
 
-    postingDisplay.style.display = "none"; 
+    // postingDisplay.style.display = "none"; 
+    displayPosts()
 
 
   let contentBox = document.getElementById("contentBox");
@@ -316,7 +321,8 @@ function Business() {
 
 function Food() {
 
-    postingDisplay.style.display = "none"; 
+    // postingDisplay.style.display = "none";
+    displayPosts() 
 
 
   let contentBox = document.getElementById("contentBox");
@@ -369,7 +375,8 @@ function Food() {
 
 function Flowers() {
 
-    postingDisplay.style.display = "none"; 
+    // postingDisplay.style.display = "none";
+    displayPosts()
 
 
   let contentBox = document.getElementById("contentBox");
@@ -423,8 +430,9 @@ function Flowers() {
 
 function Technology() {
 
-    postingDisplay.style.display = "none"; 
+    // postingDisplay.style.display = "none"; 
 
+    displayPosts()
 
   let contentBox = document.getElementById("contentBox");
   contentBox.innerHTML = `
@@ -458,8 +466,8 @@ function Technology() {
 
 
 function Cats() {
-
-    postingDisplay.style.display = "none"; 
+    
+    displayPosts()
 
 
   let contentBox = document.getElementById("contentBox");
