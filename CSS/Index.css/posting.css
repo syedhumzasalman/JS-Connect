@@ -157,32 +157,20 @@
       padding: 10px;
     }
   
-    .row {
+    .myrow {
       flex-direction: column;
       align-items: center;
     }
   
-    .col-3 {
+    .mycol-3 {
       width: 100%;
       text-align: center;
     }
   
-    .col-8 {
+    .mycol-8 {
       width: 100%;
       padding: 10px;
     }
-  
-    
-    .d-flex {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    
-    .d-flex.justify-content-center {
-      flex-direction: column;
-    }
-  
    
     .posting-box {
       width: 100%;
