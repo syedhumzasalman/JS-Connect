@@ -617,10 +617,33 @@ function post() {
         postInput.value = "";
         fileUpload.value = "";
         videoUpload.value = "";
+        fileNameDisplay.textContent = ""; 
 
         displayPosts();
     }
 }
+
+let fileUpload = document.getElementById("file-upload");
+let videoUpload = document.getElementById("video-upload");
+let fileNameDisplay = document.getElementById("fileNameDisplay");
+
+function displaySelectedFileName(inputElement) {
+    if (inputElement.files.length > 0) {
+        let fileName = inputElement.files[0].name;
+        fileNameDisplay.textContent = `Selected file: ${fileName}`;
+    } else {
+        fileNameDisplay.textContent = ""; 
+    }
+}
+
+
+fileUpload.addEventListener("change", function() {
+    displaySelectedFileName(this);
+});
+
+videoUpload.addEventListener("change", function() {
+    displaySelectedFileName(this);
+});
 
 
 
