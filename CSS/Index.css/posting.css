@@ -131,8 +131,8 @@
 
 .post-box{
     background-color: white;
-    height: 300px;
-    height: 400px;
+    min-height: 50px; 
+    max-width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -144,18 +144,84 @@
     margin: 20px;
 }
 
-
-@media only screen and (max-width: 768px){
-    .part-line {
-        left: 140px;
-        top: 45px;
-    }
+.myiframe {
+    width: 100%;
+    height: 1200px;
+    border: none;
 }
 
 
-@media only screen and (max-width: 400px){
-    .part-line {
-        left: 110px;
-        top: 44px;
+@media only screen and (max-width: 1000px) {
+   
+    .container-fluid {
+      padding: 10px;
     }
-}
+  
+    .row {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .col-3 {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .col-8 {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    
+    .d-flex {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    
+    .d-flex.justify-content-center {
+      flex-direction: column;
+    }
+  
+   
+    .posting-box {
+      width: 100%;
+    }
+  
+    .positng-input {
+      font-size: 16px;
+      height: 50px;
+    }
+  
+    
+    #postBtn {
+      font-size: 16px;
+      padding: 10px;
+    }
+  
+   
+    .custom-file-upload,
+    .custom-video-upload {
+      font-size: 14px;
+      padding: 8px 15px;
+    }
+  
+    
+    #customColorPicker {
+      width: 25px;
+      height: 25px;
+    }
+
+    .my-btn{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .content-box{
+        width: 100%;
+    }
+
+    .part-line {
+        display: none;
+    }
+  }

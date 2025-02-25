@@ -436,25 +436,25 @@ function Technology() {
 
   let contentBox = document.getElementById("contentBox");
   contentBox.innerHTML = `
-      <div class="content-box p-5 bg-white mb-5 rounded shadow-sm">
+      <div class="content-box bg-white rounded shadow-sm h-100">
           <div class="d-flex align-items-center gap-2">
           </div>
           <p class="fs-6"></p>
-          <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7297931202819244033" height="1170" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+          <iframe class="myiframe" src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7297931202819244033" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
       </div>
 
-      <div class="content-box p-5  bg-white mb-3 rounded shadow-sm">
+      <div class="content-box bg-white rounded shadow-sm">
           <div class="d-flex align-items-center gap-2">
           </div>
           <p class="fs-6"></p>
-          <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7295633213564043265" height="1149" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+          <iframe class="myiframe" src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7295633213564043265" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
       </div>
 
-      <div class="content-box p-5 bg-white mb-3 rounded shadow-sm">
+      <div class="content-box bg-white rounded shadow-sm">
           <div class="d-flex align-items-center gap-2">
           </div>
           <p class="fs-6"></p>
-          <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7299137380580540418" height="981" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+          <iframe class="myiframe" src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7299137380580540418" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
       </div>
   `;
 }
@@ -472,7 +472,7 @@ function Cats() {
 
   let contentBox = document.getElementById("contentBox");
   contentBox.innerHTML = `
-      <div class="content-box p-3 bg-white mb-3 rounded shadow-sm">
+      <div class="content-box bg-white rounded shadow-sm">
           <div class="d-flex align-items-center gap-2">
               <ion-icon class="fs-4" name="person-circle-outline"></ion-icon>
               <p class="fw-bold m-0">Gagan Saini • 3rd+</p>
@@ -566,56 +566,83 @@ postInput.addEventListener("click", function () {
 
 
 function post() {
-
     let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     let postInput = document.getElementById("postInput");
+    let fileUpload = document.getElementById("file-upload");
+    let videoUpload = document.getElementById("video-upload");
 
     let postValue = postInput.value;
-    // let postContent = postInput.innerHTML;
     let bgColor = postInput.style.backgroundColor;
-    let textColor = postInput.style.color; 
-
+    let textColor = postInput.style.color;
 
     let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
-    let newPost = {
-        "user": loggedInUser.Name,
-        "content": postValue,
-        // "content1": postContent,
-        "bgColor": bgColor,
-        "textColor": textColor,
-    };
+    let fileURL = "";
+    let videoURL = "";
 
-    posts.push(newPost);
+    // Agar file upload hui hai, toh uska URL lena
+    if (fileUpload.files.length > 0) {
+        let file = fileUpload.files[0];
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            fileURL = e.target.result;
+            savePost(fileURL, videoURL);
+        };
+        reader.readAsDataURL(file);
+    } else if (videoUpload.files.length > 0) {
+        let video = videoUpload.files[0];
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            videoURL = e.target.result;
+            savePost(fileURL, videoURL);
+        };
+        reader.readAsDataURL(video);
+    } else {
+        savePost("", "");
+    }
 
-    localStorage.setItem("posts", JSON.stringify(posts));
+    function savePost(fileURL, videoURL) {
+        let newPost = {
+            user: loggedInUser?.Name || "Anonymous",
+            content: postValue,
+            bgColor: bgColor,
+            textColor: textColor,
+            fileUpload: fileURL,
+            videoUpload: videoURL
+        };
 
-    postInput.value = "";
+        posts.push(newPost);
+        localStorage.setItem("posts", JSON.stringify(posts));
 
-    displayPosts();
+        postInput.value = "";
+        fileUpload.value = "";
+        videoUpload.value = "";
 
-    
-
+        displayPosts();
+    }
 }
 
 
-function displayPosts() {
 
+function displayPosts() {
     let contentBox = document.getElementById("contentBox");
     contentBox.innerHTML = "";
-
 
     let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
     for (let post of posts.reverse()) {
+        let fileTag = post.fileUpload ? `<img src="${post.fileUpload}" alt="Uploaded File" style="max-width:100%; height:auto;">` : "";
+        let videoTag = post.videoUpload ? `<video controls style="max-width:100%; height:auto;"><source src="${post.videoUpload}" type="video/mp4"></video>` : "";
+
         contentBox.innerHTML += `
         <div class="content-box p-3 bg-white mb-3 rounded shadow-sm">
-            <div class="d-flex align-items-center gap-2">
-                <ion-icon class="fs-4" name="person-circle-outline"></ion-icon>
-                <p class="fw-bold m-0">${post.user}</p>
+            <div class="d-flex align-items-center gap-2 bg-white">
+                <ion-icon class="fs-4 bg-white" name="person-circle-outline"></ion-icon>
+                <p class="fw-bold bg-white m-0">${post.user}</p>
             </div>
-            <p class="fs-6">${post.content}</p>
-            <p class="post-box" style="background-color: ${post.bgColor}; color: ${post.textColor};">${post.content}</p>
+            <p class="post-box mt-1" style="background-color: ${post.bgColor}; color: ${post.textColor};">${post.content}</p>
+            ${fileTag}
+            ${videoTag}
             <div class="d-flex justify-content-center gap-3 mt-2 bg-white">
                 <button class="btn btn-light">Like</button>
                 <button class="btn btn-light">Comment</button>
@@ -623,6 +650,7 @@ function displayPosts() {
         </div>`;
     }
 }
+
 
 
 window.onload = function() {
